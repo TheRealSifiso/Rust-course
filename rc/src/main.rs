@@ -37,6 +37,8 @@ Rc<T>:
     $ multiple ownership by reference counting
 
     $ heap memory allocation
+    
+    $ non-atomic reference counting, thus very low overhead.
 
     $ for use in *single-threaded* scenarios only!
 
@@ -45,12 +47,11 @@ Rc<T>:
 
         Calling Rc::clone() - which takes an immutable reference to
         an Rc type - increases the reference count by 1. The alternative
-        is to .clone() which makes deep-copies of the data stored in Rc.
+        is to call .clone() which makes deep-copies of the data stored in Rc.
         The convention is to use Rc::clone() instead.
 
         Passing an immutable reference to an Rc type as an argument to
-        Rc::strong_count() returns the number of the reference count
-        (the number of owners).
+        Rc::strong_count() returns the reference count (the number of owners).
 
     $ Rc<T> for multiple owernship works for immutable references only.
         If multiple mutable references were allowed, the borrowing rules
@@ -58,10 +59,10 @@ Rc<T>:
         place can cause data races and inconsistences.
 
         The interior mutability pattern via the combined use of the 
-        RefCell<T> type and Rc<T> type work with this immutability
+        RefCell<T> and Rc<T> can address this immutability
         restriction.
 
-        This meaning placing a RefCell<T> inside a Rc<T>:
+        This means placing a RefCell<T> inside a Rc<T>:
             Rc<RefCell<T>>
 
 */
