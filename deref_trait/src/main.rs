@@ -65,10 +65,10 @@ Deref coercions:
 
     $ Rust performs deref coercion in the following three cases:
         1) &T -> &U when T: Deref<Target=U>
-        2) &mut -> &mut U when T: DerefMut<Target=U>
-        3) &mut -> &U when T: Deref<Target=U> 
+        2) &mut T -> &mut U when T: DerefMut<Target=U>
+        3) &mut T -> &U when T: Deref<Target=U> 
 
-        Rust can coerce a mutable reference to an immutable one, but not
+        Rust can coerce a mutable reference to an immutable one, but
         the opposite is not possible!
 
 */
